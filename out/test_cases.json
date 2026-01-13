@@ -1,0 +1,110 @@
+[
+  {
+    "id": "TC-001",
+    "title": "Test TC-001",
+    "objective": "Verify user is navigated to the dashboard",
+    "preconditions": [
+      "User is on the login screen"
+    ],
+    "steps": [
+      "Enter a valid email address",
+      "Enter a valid password",
+      "Click the Sign In button"
+    ],
+    "expected_result": "User is navigated to the dashboard",
+    "priority": "High",
+    "traceability": null
+  },
+  {
+    "id": "TC-002",
+    "title": "Test TC-002",
+    "objective": "Verify error message is displayed for invalid email format",
+    "preconditions": [
+      "User is on the login screen"
+    ],
+    "steps": [
+      "Enter an invalid email address",
+      "Enter a valid password",
+      "Click the Sign In button"
+    ],
+    "expected_result": "Error message is displayed for invalid email format",
+    "priority": "High",
+    "traceability": null
+  },
+  {
+    "id": "TC-003",
+    "title": "Test TC-003",
+    "objective": "Verify error message is displayed for incorrect password",
+    "preconditions": [
+      "User is on the login screen"
+    ],
+    "steps": [
+      "Enter a valid email address",
+      "Enter an incorrect password",
+      "Click the Sign In button"
+    ],
+    "expected_result": "Error message is displayed for incorrect password",
+    "priority": "High",
+    "traceability": null
+  },
+  {
+    "id": "TC-004",
+    "title": "Test TC-004",
+    "objective": "Verify error message is displayed for blank password",
+    "preconditions": [
+      "User is on the login screen"
+    ],
+    "steps": [
+      "Enter a valid email address",
+      "Leave the password field blank",
+      "Click the Sign In button"
+    ],
+    "expected_result": "Error message is displayed for blank password",
+    "priority": "Medium",
+    "traceability": null
+  },
+  {
+    "id": "TC-005",
+    "title": "Test TC-005",
+    "objective": "Verify user is navigated to the password recovery page",
+    "preconditions": [
+      "User is on the login screen"
+    ],
+    "steps": [
+      "Click the Forgot password? link"
+    ],
+    "expected_result": "User is navigated to the password recovery page",
+    "priority": "Medium",
+    "traceability": null
+  },
+  {
+    "id": "TC-006",
+    "title": "Test TC-006",
+    "objective": "Verify password strength hint is displayed",
+    "preconditions": [
+      "User is on the login screen"
+    ],
+    "steps": [
+      "Enter a valid email address with a weak password",
+      "Click the Sign In button"
+    ],
+    "expected_result": "Password strength hint is displayed",
+    "priority": "Low",
+    "traceability": null
+  },
+  {
+    "id": "TC-007",
+    "title": "Test TC-007",
+    "objective": "Verify no password strength hint is displayed",
+    "preconditions": [
+      "User is on the login screen"
+    ],
+    "steps": [
+      "Enter a valid email address with a strong password",
+      "Click the Sign In button"
+    ],
+    "expected_result": "No password strength hint is displayed",
+    "priority": "Low",
+    "traceability": null
+  }
+]

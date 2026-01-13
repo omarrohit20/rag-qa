@@ -1,8 +1,12 @@
 import os
 import json
 import argparse
+import warnings
 from pathlib import Path
 from typing import List
+
+# Suppress deprecation warnings
+warnings.filterwarnings('ignore', category=UserWarning)
 
 from langchain_core.documents import Document
 
@@ -83,14 +87,30 @@ def render_scenarios_md(bundle: GenerationBundle) -> str:
 def render_cases_md(bundle: GenerationBundle) -> str:
     md = ["# Test Cases", ""]
     for c in bundle.cases:
-        md += [f"## {c.id} - {c.title}", "### Objective", c.objective, "### Preconditions"]
-        md += ["- " + p for p in c.preconditions]
-        md += ["### Steps"]
-        md += ["1. " + s for s in c.steps]
-        md += ["### Expected Result", c.expected_result, f"### Priority: {c.priority}"]
+        title = c.title or "Untitled"
+        case_id = c.id or "NO-ID"
+        md += [f"## {case_id} - {title}"]
+        
+        if c.objective:
+            md += ["### Objective", c.objective]
+        
+        if c.preconditions:
+            md += ["### Preconditions"]
+            md += ["- " + p for p in c.preconditions]
+        
+        if c.steps:
+            md += ["### Steps"]
+            md += ["1. " + s for s in c.steps]
+        
+        if c.expected_result:
+            md += ["### Expected Result", c.expected_result]
+        
+        md += [f"### Priority: {c.priority or 'Medium'}"]
+        
         if c.traceability:
             md += ["### Traceability"]
             md += ["- " + t for t in c.traceability]
+        
         md += [""]
     return "\n".join(md)
 

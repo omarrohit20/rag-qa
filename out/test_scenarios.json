@@ -1,0 +1,26 @@
+[
+  {
+    "id": "TS-001",
+    "title": "Valid Login",
+    "description": "User logs in with valid email and password",
+    "cases": []
+  },
+  {
+    "id": "TS-002",
+    "title": "Invalid Email Format",
+    "description": "User attempts to log in with invalid email format",
+    "cases": []
+  },
+  {
+    "id": "TS-003",
+    "title": "Incorrect Password",
+    "description": "User attempts to log in with incorrect password",
+    "cases": []
+  },
+  {
+    "id": "TS-004",
+    "title": "Forgot Password",
+    "description": "User attempts to recover password",
+    "cases": []
+  }
+]
