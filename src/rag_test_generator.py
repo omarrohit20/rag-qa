@@ -129,6 +129,8 @@ def main():
         docs = DEMO_DOCS
     else:
         docs = build_docs(args.jira_jql, args.jira_project, args.figma_file)
+        if not docs:
+            raise ValueError("No documents found from Jira/Figma. Check your credentials and query.")
 
     rag = RAGTestGenerator(docs)
 

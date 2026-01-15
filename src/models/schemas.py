@@ -61,16 +61,35 @@ class TestScenario(BaseModel):
 class TestPlan(BaseModel):
     title: str = Field(default="Test Plan", description="Test plan title")
     scope: str
-    objectives: List[str]
+    objectives: List[str] = Field(default_factory=list)
     in_scope: List[str] = []
     out_of_scope: List[str] = []
-    assumptions: List[str] = []
-    risks: List[str] = []
+    assumptions: List[str] = Field(default_factory=list)
+    risks: List[str] = Field(default_factory=list)
     strategy: str
-    metrics: List[str] = []
+    metrics: List[str] = Field(default_factory=list)
     
     class Config:
         populate_by_name = True
+    
+    @model_validator(mode='before')
+    @classmethod
+    def normalize_list_fields(cls, data):
+        """Convert string fields to lists when needed"""
+        if isinstance(data, dict):
+            for field in ['objectives', 'assumptions', 'risks', 'metrics', 'in_scope', 'out_of_scope']:
+                if field in data:
+                    value = data[field]
+                    if isinstance(value, str) and value:
+                        if '\n' in value:
+                            data[field] = [item.strip() for item in value.split('\n') if item.strip()]
+                        elif ',' in value:
+                            data[field] = [item.strip() for item in value.split(',') if item.strip()]
+                        else:
+                            data[field] = [value]
+                    elif isinstance(value, dict):
+                        data[field] = []
+        return data
 
 class GenerationBundle(BaseModel):
     test_plan: TestPlan

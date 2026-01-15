@@ -22,9 +22,27 @@ class JiraClient:
             raise ValueError("Provide either JQL or project_key")
         if project_key and not jql:
             jql = f"project = {project_key} ORDER BY updated DESC"
+        
+        # Use Jira API v3 search/jql endpoint
         url = f"{self.base_url}/rest/api/3/search/jql"
-        params = {"jql": jql, "maxResults": limit}
+        params = {
+            "jql": jql, 
+            "maxResults": limit,
+            "fields": "summary,description,customfield_10073"
+        }
+        
         resp = requests.get(url, headers=self.headers, params=params, timeout=30)
+        
+        # Better error messages
+        if resp.status_code == 410:
+            raise ValueError(f"Jira API returned 410 Gone. The API token may be expired or invalid. Response: {resp.text[:200]}")
+        if resp.status_code == 401:
+            raise ValueError("Jira authentication failed. Check JIRA_API_TOKEN.")
+        if resp.status_code == 403:
+            raise ValueError("Jira access forbidden. Check permissions.")
+        if resp.status_code == 404:
+            raise ValueError("Jira API endpoint not found. Check JIRA_BASE_URL.")
+        
         resp.raise_for_status()
         data = resp.json()
         docs: List[Document] = []
