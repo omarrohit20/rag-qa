@@ -22,7 +22,7 @@ class JiraClient:
             raise ValueError("Provide either JQL or project_key")
         if project_key and not jql:
             jql = f"project = {project_key} ORDER BY updated DESC"
-        url = f"{self.base_url}/rest/api/3/search"
+        url = f"{self.base_url}/rest/api/3/search/jql"
         params = {"jql": jql, "maxResults": limit}
         resp = requests.get(url, headers=self.headers, params=params, timeout=30)
         resp.raise_for_status()
