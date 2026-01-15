@@ -148,17 +148,83 @@ class RAGTestGenerator:
                 try:
                     data = json.loads(json_str)
                 except json.JSONDecodeError as e:
-                    # Try to fix by truncating at error position
+                    # Handle unterminated strings and other JSON errors
                     if e.pos is not None:
-                        truncated = json_str[:e.pos]
+                        # For unterminated string errors, try to find the last complete object
+                        if "Unterminated string" in str(e) or "unterminated" in str(e).lower():
+                            # Find the last complete item in array or object
+                            truncated = json_str[:e.pos]
+                            
+                            # If we're in an array, find the last complete object before the error
+                            if json_str.strip().startswith('['):
+                                # Find the last complete object by looking for '},\n' or '},'
+                                last_complete = truncated.rfind('},')
+                                if last_complete == -1:
+                                    last_complete = truncated.rfind('}')
+                                if last_complete != -1:
+                                    truncated = truncated[:last_complete + 1]
+                            
+                            # Close the string if we're inside quotes
+                            if truncated.count('"') % 2 != 0:
+                                truncated = truncated.rstrip() + '"'
+                        else:
+                            # For other errors, just truncate at error position
+                            truncated = json_str[:e.pos]
+                        
+                        # Remove trailing commas
+                        truncated = truncated.rstrip(',').rstrip()
+                        
                         # Close any open brackets/braces
                         open_braces = truncated.count('{') - truncated.count('}')
                         open_brackets = truncated.count('[') - truncated.count(']')
-                        truncated = truncated.rstrip(',').rstrip() + ']' * open_brackets + '}' * open_braces
+                        truncated = truncated + ']' * open_brackets + '}' * open_braces
+                        
                         try:
                             data = json.loads(truncated)
                         except Exception as truncate_err:
-                            raise ValueError(f"Failed to parse JSON. Error: {e}")
+                            # Last resort: try to extract just the valid items from the array
+                            if json_str.strip().startswith('['):
+                                # Find all complete objects in the array
+                                valid_items = []
+                                depth = 0
+                                current_obj = ""
+                                in_string = False
+                                escape_next = False
+                                
+                                for char in json_str[1:]:  # Skip opening [
+                                    if escape_next:
+                                        current_obj += char
+                                        escape_next = False
+                                        continue
+                                    if char == '\\' and in_string:
+                                        escape_next = True
+                                        current_obj += char
+                                        continue
+                                    if char == '"' and not escape_next:
+                                        in_string = not in_string
+                                    
+                                    current_obj += char
+                                    
+                                    if not in_string:
+                                        if char == '{':
+                                            depth += 1
+                                        elif char == '}':
+                                            depth -= 1
+                                            if depth == 0:
+                                                # Complete object found
+                                                try:
+                                                    obj = json.loads(current_obj.strip())
+                                                    valid_items.append(obj)
+                                                    current_obj = ""
+                                                except:
+                                                    pass
+                                
+                                if valid_items:
+                                    data = valid_items
+                                else:
+                                    raise ValueError(f"Failed to parse JSON. Error: {e}")
+                            else:
+                                raise ValueError(f"Failed to parse JSON. Error: {e}")
                     else:
                         raise ValueError(f"Failed to parse JSON. Error: {e}")
                 
