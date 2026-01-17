@@ -7,7 +7,7 @@ Generate Test Plan, Test Scenarios, and Detailed Test Cases from product require
 - Extract text and comments from Figma files
 - Index with FAISS + HuggingFace embeddings
 - Retrieve context and generate structured outputs via LangChain
-- Model provider selection: Groq (free), Anthropic, OpenAI
+- Model provider selection: Groq (free), Cohere(free), Anthropic, OpenAI
 - CLI with dry-run/demo mode for local testing
 - Improved JSON parsing with automatic unwrapping and error recovery
 
