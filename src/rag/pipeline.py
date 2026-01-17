@@ -8,7 +8,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
-from langchain_community.chat_models import ChatCohere
+from langchain_cohere import ChatCohere
 from pydantic import BaseModel
 
 from src.rag.groq_wrapper import ChatGroq

@@ -53,10 +53,57 @@ class TestScenario(BaseModel):
     id: str
     title: str = Field(..., alias="name")
     description: str
-    cases: List[TestCase] = []
+    cases: List[TestCase] = Field(default_factory=list)
     
     class Config:
         populate_by_name = True
+        extra = "ignore"
+
+    @model_validator(mode='before')
+    @classmethod
+    def normalize_model(cls, data):
+        """Normalize alternate field names from LLM output for scenarios"""
+        if isinstance(data, dict):
+            # Map scenarioId -> id
+            if 'scenarioId' in data and 'id' not in data:
+                data['id'] = data['scenarioId']
+            if 'scenario_id' in data and 'id' not in data:
+                data['id'] = data['scenario_id']
+
+            # Normalize title/name variants
+            # Accept 'name', 'title', 'scenarioName', 'scenarioTitle'
+            if 'name' in data and 'title' not in data:
+                data['title'] = data['name']
+            if 'scenarioName' in data and 'title' not in data:
+                data['title'] = data['scenarioName']
+            if 'scenarioTitle' in data and 'title' not in data:
+                data['title'] = data['scenarioTitle']
+            if 'title' in data and not data['title'] and data.get('name'):
+                data['title'] = data['name']
+
+            # Normalize description variants
+            for alt in ['details', 'scenarioDescription', 'desc']:
+                if alt in data and 'description' not in data:
+                    data['description'] = data[alt]
+
+            # Ensure cases is a list and strip nested cases if incorrectly provided
+            if 'cases' in data:
+                if isinstance(data['cases'], dict):
+                    # Some providers may return {'testCases': [...]} under cases
+                    for k in ['testCases', 'test_cases']:
+                        if k in data['cases'] and isinstance(data['cases'][k], list):
+                            data['cases'] = data['cases'][k]
+                            break
+                elif isinstance(data['cases'], str) and data['cases']:
+                    data['cases'] = []  # scenarios should not include cases per instructions
+                elif not isinstance(data['cases'], list):
+                    data['cases'] = []
+
+            # If title is still missing but id exists, synthesize a title
+            if not data.get('title') and data.get('id'):
+                data['title'] = f"Scenario {data['id']}"
+
+        return data
 
 class TestPlan(BaseModel):
     title: str = Field(default="Test Plan", description="Test plan title")
@@ -77,6 +124,21 @@ class TestPlan(BaseModel):
     def normalize_list_fields(cls, data):
         """Convert string fields to lists when needed"""
         if isinstance(data, dict):
+            # Handle string/dict fields that should be strings
+            for field in ['scope', 'strategy']:
+                if field in data:
+                    value = data[field]
+                    if isinstance(value, dict):
+                        # Try to extract a string from dict
+                        if 'value' in value:
+                            data[field] = value['value']
+                        elif 'text' in value:
+                            data[field] = value['text']
+                        else:
+                            # Join all dict values as string
+                            data[field] = '; '.join(str(v) for v in value.values())
+            
+            # Handle list fields
             for field in ['objectives', 'assumptions', 'risks', 'metrics', 'in_scope', 'out_of_scope']:
                 if field in data:
                     value = data[field]
