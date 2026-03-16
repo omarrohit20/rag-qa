@@ -2,109 +2,222 @@
   {
     "id": "TC-001",
     "title": "Test TC-001",
-    "objective": "Verify user is navigated to the dashboard",
+    "objective": "Verify user is successfully registered and logged in",
     "preconditions": [
-      "User is on the login screen"
+      "User is not registered"
     ],
     "steps": [
-      "Enter a valid email address",
-      "Enter a valid password",
-      "Click the Sign In button"
+      "Open the application",
+      "Click on the register button",
+      "Fill in the registration form with valid data",
+      "Submit the registration form"
     ],
-    "expected_result": "User is navigated to the dashboard",
+    "expected_result": "User is successfully registered and logged in",
     "priority": "High",
     "traceability": null
   },
   {
     "id": "TC-002",
     "title": "Test TC-002",
-    "objective": "Verify error message is displayed for invalid email format",
+    "objective": "Verify user is successfully logged in",
     "preconditions": [
-      "User is on the login screen"
+      "User is registered"
     ],
     "steps": [
-      "Enter an invalid email address",
-      "Enter a valid password",
-      "Click the Sign In button"
+      "Open the application",
+      "Click on the login button",
+      "Fill in the login form with valid credentials",
+      "Submit the login form"
     ],
-    "expected_result": "Error message is displayed for invalid email format",
+    "expected_result": "User is successfully logged in",
     "priority": "High",
     "traceability": null
   },
   {
     "id": "TC-003",
     "title": "Test TC-003",
-    "objective": "Verify error message is displayed for incorrect password",
+    "objective": "Verify profile information is successfully updated",
     "preconditions": [
-      "User is on the login screen"
+      "User is logged in"
     ],
     "steps": [
-      "Enter a valid email address",
-      "Enter an incorrect password",
-      "Click the Sign In button"
+      "Click on the profile management button",
+      "Update the profile information with valid data",
+      "Save the changes"
     ],
-    "expected_result": "Error message is displayed for incorrect password",
-    "priority": "High",
+    "expected_result": "Profile information is successfully updated",
+    "priority": "Medium",
     "traceability": null
   },
   {
     "id": "TC-004",
     "title": "Test TC-004",
-    "objective": "Verify error message is displayed for blank password",
+    "objective": "Verify challenge progress is displayed correctly",
     "preconditions": [
-      "User is on the login screen"
+      "User is logged in"
     ],
     "steps": [
-      "Enter a valid email address",
-      "Leave the password field blank",
-      "Click the Sign In button"
+      "Click on the challenge tracking button",
+      "View the challenge progress"
     ],
-    "expected_result": "Error message is displayed for blank password",
+    "expected_result": "Challenge progress is displayed correctly",
     "priority": "Medium",
     "traceability": null
   },
   {
     "id": "TC-005",
     "title": "Test TC-005",
-    "objective": "Verify user is navigated to the password recovery page",
+    "objective": "Verify scoreboard is displayed correctly",
     "preconditions": [
-      "User is on the login screen"
+      "User is logged in"
     ],
     "steps": [
-      "Click the Forgot password? link"
+      "Click on the scoreboard button",
+      "View the scoreboard"
     ],
-    "expected_result": "User is navigated to the password recovery page",
+    "expected_result": "Scoreboard is displayed correctly",
     "priority": "Medium",
     "traceability": null
   },
   {
     "id": "TC-006",
     "title": "Test TC-006",
-    "objective": "Verify password strength hint is displayed",
+    "objective": "Verify rewards and challenges are displayed correctly",
     "preconditions": [
-      "User is on the login screen"
+      "User is logged in"
     ],
     "steps": [
-      "Enter a valid email address with a weak password",
-      "Click the Sign In button"
+      "Click on the gamification button",
+      "View the rewards and challenges"
     ],
-    "expected_result": "Password strength hint is displayed",
-    "priority": "Low",
+    "expected_result": "Rewards and challenges are displayed correctly",
+    "priority": "Medium",
     "traceability": null
   },
   {
     "id": "TC-007",
     "title": "Test TC-007",
-    "objective": "Verify no password strength hint is displayed",
+    "objective": "Verify access is denied and an error message is displayed",
     "preconditions": [
-      "User is on the login screen"
+      "User is logged in"
     ],
     "steps": [
-      "Enter a valid email address with a strong password",
-      "Click the Sign In button"
+      "Attempt to access a restricted resource without permission"
     ],
-    "expected_result": "No password strength hint is displayed",
-    "priority": "Low",
+    "expected_result": "Access is denied and an error message is displayed",
+    "priority": "High",
+    "traceability": null
+  },
+  {
+    "id": "TC-008",
+    "title": "Test TC-008",
+    "objective": "Verify access is granted and the resource is displayed",
+    "preconditions": [
+      "User is logged in"
+    ],
+    "steps": [
+      "Attempt to access a restricted resource with permission"
+    ],
+    "expected_result": "Access is granted and the resource is displayed",
+    "priority": "High",
+    "traceability": null
+  },
+  {
+    "id": "TC-009",
+    "title": "Test TC-009",
+    "objective": "Verify the vulnerability is detected and prevented",
+    "preconditions": [
+      "User is logged in"
+    ],
+    "steps": [
+      "Attempt to exploit a business logic vulnerability"
+    ],
+    "expected_result": "The vulnerability is detected and prevented",
+    "priority": "High",
+    "traceability": null
+  },
+  {
+    "id": "TC-010",
+    "title": "Test TC-010",
+    "objective": "Verify the vulnerability is detected and prevented",
+    "preconditions": [
+      "User is logged in"
+    ],
+    "steps": [
+      "Attempt to exploit an API security vulnerability"
+    ],
+    "expected_result": "The vulnerability is detected and prevented",
+    "priority": "High",
+    "traceability": null
+  },
+  {
+    "id": "TC-011",
+    "title": "Test TC-011",
+    "objective": "Verify the vulnerability is detected and prevented",
+    "preconditions": [
+      "User is logged in"
+    ],
+    "steps": [
+      "Attempt to exploit an authentication and authorization vulnerability"
+    ],
+    "expected_result": "The vulnerability is detected and prevented",
+    "priority": "High",
+    "traceability": null
+  },
+  {
+    "id": "TC-012",
+    "title": "Test TC-012",
+    "objective": "Verify the vulnerability is detected and prevented",
+    "preconditions": [
+      "User is logged in"
+    ],
+    "steps": [
+      "Attempt to exploit an access control vulnerability"
+    ],
+    "expected_result": "The vulnerability is detected and prevented",
+    "priority": "High",
+    "traceability": null
+  },
+  {
+    "id": "TC-013",
+    "title": "Test TC-013",
+    "objective": "Verify access is denied and a login prompt is displayed",
+    "preconditions": [
+      "User is not logged in"
+    ],
+    "steps": [
+      "Attempt to access a restricted resource"
+    ],
+    "expected_result": "Access is denied and a login prompt is displayed",
+    "priority": "High",
+    "traceability": null
+  },
+  {
+    "id": "TC-014",
+    "title": "Test TC-014",
+    "objective": "Verify user is successfully logged out",
+    "preconditions": [
+      "User is logged in"
+    ],
+    "steps": [
+      "Log out of the application"
+    ],
+    "expected_result": "User is successfully logged out",
+    "priority": "Medium",
+    "traceability": null
+  },
+  {
+    "id": "TC-015",
+    "title": "Test TC-015",
+    "objective": "Verify access is denied and an error message is displayed",
+    "preconditions": [
+      "User is logged in"
+    ],
+    "steps": [
+      "Attempt to access a resource with an invalid token"
+    ],
+    "expected_result": "Access is denied and an error message is displayed",
+    "priority": "High",
     "traceability": null
   }
 ]

@@ -1,13 +1,25 @@
 # Test Scenarios
 
-## TS-001 - Valid Login
-User logs in with valid email and password
+## TS-1 - User Registration
+Test user registration functionality
 
-## TS-002 - Invalid Email Format
-User attempts to log in with invalid email format
+## TS-2 - User Authentication
+Test user authentication functionality
 
-## TS-003 - Incorrect Password
-User attempts to log in with incorrect password
+## TS-3 - User Profile Management
+Test user profile management functionality
 
-## TS-004 - Forgot Password
-User attempts to recover password
+## TS-4 - Business Logic Vulnerability Scenarios
+Test business logic vulnerability scenarios
+
+## TS-5 - API Security Vulnerability Scenarios
+Test API security vulnerability scenarios
+
+## TS-6 - Authentication and Authorization Vulnerability Scenarios
+Test authentication and authorization vulnerability scenarios
+
+## TS-7 - Access Control Vulnerability Scenarios
+Test access control vulnerability scenarios
+
+## TS-8 - Gamification, Scoreboard, and Challenge Tracking
+Test gamification, scoreboard, and challenge tracking functionality

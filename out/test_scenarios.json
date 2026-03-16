@@ -1,26 +1,50 @@
 [
   {
-    "id": "TS-001",
-    "title": "Valid Login",
-    "description": "User logs in with valid email and password",
+    "id": "TS-1",
+    "title": "User Registration",
+    "description": "Test user registration functionality",
     "cases": []
   },
   {
-    "id": "TS-002",
-    "title": "Invalid Email Format",
-    "description": "User attempts to log in with invalid email format",
+    "id": "TS-2",
+    "title": "User Authentication",
+    "description": "Test user authentication functionality",
     "cases": []
   },
   {
-    "id": "TS-003",
-    "title": "Incorrect Password",
-    "description": "User attempts to log in with incorrect password",
+    "id": "TS-3",
+    "title": "User Profile Management",
+    "description": "Test user profile management functionality",
     "cases": []
   },
   {
-    "id": "TS-004",
-    "title": "Forgot Password",
-    "description": "User attempts to recover password",
+    "id": "TS-4",
+    "title": "Business Logic Vulnerability Scenarios",
+    "description": "Test business logic vulnerability scenarios",
+    "cases": []
+  },
+  {
+    "id": "TS-5",
+    "title": "API Security Vulnerability Scenarios",
+    "description": "Test API security vulnerability scenarios",
+    "cases": []
+  },
+  {
+    "id": "TS-6",
+    "title": "Authentication and Authorization Vulnerability Scenarios",
+    "description": "Test authentication and authorization vulnerability scenarios",
+    "cases": []
+  },
+  {
+    "id": "TS-7",
+    "title": "Access Control Vulnerability Scenarios",
+    "description": "Test access control vulnerability scenarios",
+    "cases": []
+  },
+  {
+    "id": "TS-8",
+    "title": "Gamification, Scoreboard, and Challenge Tracking",
+    "description": "Test gamification, scoreboard, and challenge tracking functionality",
     "cases": []
   }
 ]

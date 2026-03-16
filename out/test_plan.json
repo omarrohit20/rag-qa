@@ -1,25 +1,29 @@
 {
   "title": "Test Plan",
-  "scope": "Login functionality with email and password validation",
+  "scope": "Testing of security training application with focus on business logic, API, authentication and authorization, access control, gamification, scoreboard, and challenge tracking",
   "objectives": [
-    "Verify email format validation",
-    "Validate error handling for incorrect passwords",
-    "Confirm successful login navigation to dashboard"
+    "Identify business logic vulnerabilities",
+    "Explore API vulnerabilities",
+    "Understand authentication and authorization flaws",
+    "Detect access control weaknesses",
+    "Validate gamification, scoreboard, and challenge tracking functionality"
   ],
   "in_scope": [],
   "out_of_scope": [],
   "assumptions": [
-    "Valid user credentials are available for testing",
-    "Dashboard is properly configured for post-login navigation"
+    "Access to application source code and documentation",
+    "Availability of test environment and necessary tools"
   ],
   "risks": [
-    "Insufficient test data for email format validation",
-    "Inadequate error handling for edge cases"
+    "Insufficient test coverage",
+    "Inadequate test data",
+    "Delays in testing due to dependencies on other teams"
   ],
-  "strategy": "Black box testing with equivalence partitioning and boundary value analysis",
+  "strategy": "Comprehensive testing approach including functional, non-functional, component level, integration, UAT, security, performance and load, scalability and resilience testing",
   "metrics": [
     "Test coverage percentage",
-    "Pass rate for login scenarios",
-    "Average time to identify and report defects"
+    "Defect density",
+    "Test execution time",
+    "Application performance metrics (e.g. response time, throughput)"
   ]
 }

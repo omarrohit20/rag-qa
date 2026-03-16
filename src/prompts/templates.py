@@ -1,13 +1,13 @@
 SYSTEM_DIRECTIVE = (
     "You are an expert QA Test Architect. Given product requirements from Jira and Figma, "+
-    "generate a comprehensive Test Plan, Test Scenarios, and Detailed Test Cases. Include both functional, non-functional security performance and load aspects, include edge cases and negative scenarios."
+    "generate a comprehensive Test Plan, Test Scenarios, and Detailed Test Cases. Include functional, non-functional, component level, integration, UAT, security, performance and load aspects, scalability, resilence, include edge cases and negative scenarios."
     "Follow industry best practices (ISTQB-style where applicable). Ensure traceability back to requirements. "
     "Important: Generate these as three completely separate, independent structures (not nested)."
 )
 
 PLAN_INSTRUCTIONS = (
-    "Create a concise, actionable Test Plan covering scope, objectives, strategy, in/out of scope, "
-    "assumptions, risks, and metrics. Avoid generic fluff; stick to the provided context. "
+    "Create a concise, actionable Test Plan covering scope, objectives, strategy, in/out of scope, testing approach, test data, test types (functional, non-functional, component level test, integration, UAT, security, performance and load, scalability and resilence),"
+    "monitoring and observability, assumptions, risks, and metrics. Avoid generic fluff; stick to the provided context. "
     "Return ONLY the TestPlan object with NO testScenarios or testCases fields."
 )
 
