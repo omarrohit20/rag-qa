@@ -115,6 +115,24 @@ def render_cases_md(bundle: GenerationBundle) -> str:
     return "\n".join(md)
 
 
+def generate_test_bundle(jira_jql=None, jira_project=None, figma_file=None, demo=False, dry_run=False):
+    if demo:
+        docs = DEMO_DOCS
+    else:
+        docs = build_docs(jira_jql, jira_project, figma_file)
+        if not docs:
+            raise ValueError("No documents found from Jira/Figma. Check your credentials and query.")
+
+    rag = RAGTestGenerator(docs)
+
+    if dry_run:
+        ctx = rag._context_from_query("Generate QA assets from given requirements")
+        return ctx[:4000]
+
+    bundle = rag.generate_all()
+    return bundle
+
+
 def main():
     ap = argparse.ArgumentParser(description="RAG Test Generator")
     ap.add_argument("--jira-jql", type=str, default=None)
